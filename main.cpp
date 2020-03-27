@@ -1,9 +1,8 @@
 #include "Window.h"
 
 int main() {
-    std::unique_ptr<Runtime> app = std::make_unique<Runtime>();
     try {
-        app->run();
+        std::unique_ptr<Runtime> app = std::make_unique<Runtime>(800, 600);
     }
     catch (std::exception & e) {
         std::cerr << e.what() << std::endl;

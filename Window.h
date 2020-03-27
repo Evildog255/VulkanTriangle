@@ -9,13 +9,24 @@
 
 #include <iostream>
 #include <vector>
+#include <optional>
 class Runtime {
 public:
-	void run();
-	void initVulkan();
+	struct QueueFamilyIndices {
+		std::optional<uint32_t> graphicsFamily;
+
+		bool isComplete() {
+			return graphicsFamily.has_value();
+		}
+	};
+	Runtime(int width, int height);
+	~Runtime();
+	void initVulkan(int width, int height);
 	void createInstance();
 	bool isDeviceSuitable(VkPhysicalDevice device);
+	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 	void pickPhysicalDevice();
+	void createLogicalDevice();
 	void mainLoop();
 	void cleanup();
 private:
